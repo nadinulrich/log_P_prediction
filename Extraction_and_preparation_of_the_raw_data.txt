@@ -1,0 +1,23 @@
+Marvin Suite Mol Convert for conversion from sdf file to SMILES was used to extract structure representations provided by Mansouri, using the following line of code in the command line:
+
+C:\Program Files\ChemAxon\MarvinSuite\bin\molconvert csv -o data.csv -c   "" data.sdf
+
+
+To split the data into test, validation, and training set we used Microsoft Excel.
+
+The identifiers were randomly shuffled using the rand() function. The first 10% with the lowest random number were permanently assigned to the test set.
+
+The remaining data were randomly split into training and validation set using again the rand() function. For every new training set, the first 80% of identifiers with the lowest random number were permanently assigned to the training set, the remaining 20% to the validation set.
+
+The SMILES with corresponding identifier were then assigned to a specific set using the COUNTIF() function.
+
+Example function:
+
+=IF(COUNTIF($C$2:$C$10001,A2)=0,FALSE,TRUE)
+
+Whereby A is the column of the identifier next to the SMILES that needs to be assigned to a specific set, and the first 10 000 values in column C represent the identifiers assigned to the training set.
+
+This method assures that all representations of a chemical (e.g. tautomers) will be assigned to the same data set (e.g. training). A simple random split of all SMILES would undermine the meaning of the validation set, because the model could learn on chemicals of the validation set.
+
+
+The final dataset was randomly shuffled, again using the rand() function and saved as a csv file containing the SMILES and experimental log P value.
