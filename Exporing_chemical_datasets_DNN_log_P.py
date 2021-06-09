@@ -98,7 +98,7 @@ train_dataset, test_dataset = read_data(data_directory)
 
 model = TensorGraph(tensorboard=True,
                     batch_size=50,
-                    learning_rate=0.0005,
+                    learning_rate=0.0001,
                     use_queue=False,
                     model_dir=model_dir)
 #Placeholders for the chemical structures
@@ -150,7 +150,7 @@ loss = WeightedError(in_layers=[all_cost, weights])
 model.set_loss(loss)
 
 #Define Training of neural network and the number of epochs for training
-gene = default_generator(train_dataset, epochs=130, predict=True, pad_batches=True,
+gene = default_generator(train_dataset, epochs=60, predict=True, pad_batches=True,
                          labels=labels, weights=weights, atom_features=atom_features, degree_slice=degree_slice,
                          membership=membership, deg_adjs=deg_adjs)
 model.fit_generator(gene)
