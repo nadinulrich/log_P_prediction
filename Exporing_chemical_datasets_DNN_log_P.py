@@ -129,14 +129,7 @@ for layer_size in [128, 128]:
   batch_norm2 = BatchNorm(in_layers=[gc2])
   gp2_in = [batch_norm2, degree_slice, membership] + deg_adjs
   in_layer2 = GraphPool(in_layers=gp2_in)
-#Layer 3
-for layer_size in [256, 256]:
-  gc3_in = [in_layer2, degree_slice, membership] + deg_adjs
-  gc3 = GraphConv(layer_size, activation_fn=tf.nn.relu, in_layers=gc3_in)
-  batch_norm3 = BatchNorm(in_layers=[gc3])
-  gp3_in = [batch_norm3, degree_slice, membership] + deg_adjs
-  in_layer3 = GraphPool(in_layers=gp3_in)
-dense = Dense(out_channels=256, activation_fn=tf.nn.relu, in_layers=[in_layer3])
+dense = Dense(out_channels=256, activation_fn=tf.nn.relu, in_layers=[in_layer2])
 batch_norm3 = BatchNorm(in_layers=[dense])
 batch_norm3 = Dropout(0.1, in_layers=[batch_norm3])
 readout = GraphGather(
