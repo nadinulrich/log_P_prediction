@@ -1,5 +1,5 @@
 This git repository contains the Supplementary Information to the publication 
-“Exploring chemical datasets with deep learning techniques – the octanol-water partition coefficient dataset as example”:
+“Exploring the octanol-water partition coefficient dataset using deep learning techniques and data augmentation”:
 
 
 -	Exporing_chemical_datasets_DNN_log_P.py
